@@ -5,6 +5,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.reactive.CorsWebFilter;
+import org.springframework.web.util.pattern.PathPatternParser;
+
 @Configuration
 public class WebConfig {
 
@@ -14,8 +21,26 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 // 允许 localhost:4200 访问所有的 API 路径
+                System.out.println("Adding CORS Mappings");
                 registry.addMapping("/**").allowedOrigins("http://localhost:4200");
             }
         };
     }
 }
+
+// @Configuration
+// public class WebConfig {
+
+//     @Bean
+//     public CorsConfigurationSource corsConfigurationSource() {
+//         CorsConfiguration config = new CorsConfiguration();
+//         config.setAllowCredentials(true);
+//         config.addAllowedOrigin("*");
+//         config.addAllowedHeader("*");
+//         config.addAllowedMethod("*");
+
+//         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//         source.registerCorsConfiguration("/**", config);
+//         return source;
+//     }
+// }

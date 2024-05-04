@@ -12,6 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.springboot.FlomadAIplanner.service.AmadeusAuthService;
+
+////////////////////////////////////////////
+/**
+ * @class
+ * @description This is a controller that checking whether the price of flights you fetched have changed. 
+ */
+//////////////////////////////////////////
 @RestController
 public class PricingController {
     @Value("${amadeus.api.key}")
@@ -22,7 +30,6 @@ public class PricingController {
 
     private final AmadeusAuthService amadeusAuthService;
 
-    // 注入AmadeusAuthService
     @Autowired
     public PricingController(AmadeusAuthService amadeusAuthService) {
         this.amadeusAuthService = amadeusAuthService;
@@ -55,7 +62,7 @@ public class PricingController {
             ResponseEntity<String> response = restTemplate.postForEntity(verifyUrl, request, String.class);
             return response.getBody();
         } catch (Exception e) {
-            e.printStackTrace(); // 在生产环境中，考虑使用日志框架记录异常
+            e.printStackTrace();
             return "Error processing the request: " + e.getMessage();
         }
     }

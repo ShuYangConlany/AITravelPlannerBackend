@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 public class TimeController {
-
-    @CrossOrigin // allow all sources
+    @CrossOrigin // allow all sources, otherwise will report CORs error
     @GetMapping("/time")
     public String getTime() {
         RestTemplate restTemplate = new RestTemplate();
