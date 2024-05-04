@@ -118,6 +118,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
                 <configuration>
 					<mainClass>com.springboot.FlomadAIplanner.FlomadAiPlannerApplication</mainClass>
                     <source>21</source>
