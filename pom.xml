@@ -125,6 +125,8 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
                 <configuration>
 					<mainClass>com.springboot.FlomadAIplanner.FlomadAiPlannerApplication</mainClass>
                     <source>21</source>
