@@ -30,7 +30,9 @@ public class FlomadAiPlannerApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-	
+}
+
+
 	// @Bean
 	// public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 	// 	HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -52,4 +54,3 @@ public class FlomadAiPlannerApplication {
 	// 		});
 	// 	};
 	// }
-}

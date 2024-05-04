@@ -119,6 +119,7 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
+					<mainClass>com.springboot.FlomadAIplanner.FlomadAiPlannerApplication</mainClass>
                     <source>21</source>
                     <target>21</target>
                 </configuration>
