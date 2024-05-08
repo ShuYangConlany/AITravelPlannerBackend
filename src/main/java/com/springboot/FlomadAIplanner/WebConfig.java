@@ -12,6 +12,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.util.pattern.PathPatternParser;
 
+import com.springboot.FlomadAIplanner.config.GlobalConstants;
+
 @Configuration
 public class WebConfig {
 
@@ -22,7 +24,11 @@ public class WebConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 // 允许 localhost:4200 访问所有的 API 路径
                 System.out.println("Adding CORS Mappings");
-                registry.addMapping("/**").allowedOrigins("http://localhost:4200");
+                registry.addMapping("/**").allowedOrigins(
+                    "http://localhost:4200",
+                    GlobalConstants.FRONT_END_URL
+                );
+                
             }
         };
     }
