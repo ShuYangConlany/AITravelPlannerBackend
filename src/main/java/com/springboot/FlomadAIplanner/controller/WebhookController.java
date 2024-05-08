@@ -54,7 +54,7 @@ public class WebhookController {
     @Autowired
     private DialogflowService dialogflowService;
 
-    @CrossOrigin(origins = {"http://localhost:4200"})
+    @CrossOrigin(origins = {"http://localhost:4200","https://aitravelplanner-e6f156c81d14.herokuapp.com/"})
     @PostMapping("/dialogflowLiaison")
     public ResponseEntity<String> handleDialogflowRequest(@RequestBody DialogflowRequest request) {
         try {
