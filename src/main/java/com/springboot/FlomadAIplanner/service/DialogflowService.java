@@ -1,21 +1,15 @@
 package com.springboot.FlomadAIplanner.service;
 
 import com.google.cloud.dialogflow.cx.v3.*;
+import com.google.cloud.dialogflow.cx.v3.ResponseMessage.Text;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Logger;
 import com.google.protobuf.util.JsonFormat;
-
-
-import com.google.cloud.dialogflow.cx.v3.DetectIntentRequest;
-import com.google.cloud.dialogflow.cx.v3.DetectIntentResponse;
-import com.google.cloud.dialogflow.cx.v3.QueryInput;
-import com.google.cloud.dialogflow.cx.v3.SessionName;
-import com.google.cloud.dialogflow.cx.v3.SessionsClient;
-import com.google.cloud.dialogflow.cx.v3.SessionsSettings;
-import com.google.cloud.dialogflow.cx.v3.TextInput;
 
 
 
@@ -147,6 +141,45 @@ public class DialogflowService {
         } catch (Exception e) {
             logger.severe("Error communicating with Dialogflow: " + e.getMessage());
             throw new IOException("Failed to communicate with Dialogflow API", e);
+        }
+    }
+
+    public String processInput(String userInput) throws Exception {
+        String projectId = "flomadaiplanner";
+        String locationId = "us-central1";
+        String agentId = "7fb1e868-d836-46d8-b57a-91fd6c0e6d34";
+        String sessionId = "unique-session-id2";
+        String endpoint = "us-central1-dialogflow.googleapis.com:443";
+
+        SessionsSettings.Builder sessionsSettingsBuilder = SessionsSettings.newBuilder();
+        sessionsSettingsBuilder.setEndpoint(endpoint);
+
+        try (SessionsClient sessionsClient = SessionsClient.create(sessionsSettingsBuilder.build())) {
+            String sessionPath = SessionName.of(projectId, locationId, agentId, sessionId).toString();
+            TextInput.Builder textInputBuilder = TextInput.newBuilder().setText(userInput);
+
+            QueryInput queryInput = QueryInput.newBuilder().setText(textInputBuilder).setLanguageCode("en-US").build();
+            DetectIntentRequest detectIntentRequest = DetectIntentRequest.newBuilder()
+                    .setSession(sessionPath)
+                    .setQueryInput(queryInput)
+                    .build();
+            logger.info(detectIntentRequest.toString());
+
+            DetectIntentResponse response = sessionsClient.detectIntent(detectIntentRequest);
+            logger.info("response:"+response.toString());
+
+            QueryResult queryResult = response.getQueryResult();
+
+            StringBuilder responseTextBuilder = new StringBuilder();
+            List<ResponseMessage> messages = queryResult.getResponseMessagesList();
+            for (ResponseMessage message : messages) {
+                if (message.hasText()) {
+                    Text textMessage = message.getText();
+                    responseTextBuilder.append(String.join("\n", textMessage.getTextList()));
+                }
+            }
+            logger.info("responseTextBuilder:"+responseTextBuilder.toString());
+            return responseTextBuilder.toString();
         }
     }
 }

@@ -51,7 +51,7 @@ public class PricingController {
             String verifyUrl = "https://test.api.amadeus.com/v1/shopping/flight-offers/pricing";
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer " + accessToken); // 在这里添加accessToken
+            headers.set("Authorization", "Bearer " + accessToken);
             headers.set("Content-Type", "application/json");
             headers.set("X-HTTP-Method-Override", "GET");
     

@@ -31,9 +31,13 @@ package com.springboot.FlomadAIplanner.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.springboot.FlomadAIplanner.DTO.DialogflowRequest;
+import com.springboot.FlomadAIplanner.service.DialogflowService;
 import com.springboot.FlomadAIplanner.service.WebhookFlightJumpPageService;
 import java.util.logging.Logger;
 
@@ -45,6 +49,22 @@ public class WebhookController {
     @Autowired
     public WebhookController(WebhookFlightJumpPageService service) {
         this.service = service;
+    }
+
+    @Autowired
+    private DialogflowService dialogflowService;
+
+    @CrossOrigin(origins = {"http://localhost:4200"})
+    @PostMapping("/dialogflowLiaison")
+    public ResponseEntity<String> handleDialogflowRequest(@RequestBody DialogflowRequest request) {
+        try {
+            String userInput = request.getMessage();
+            String responseText = dialogflowService.processInput(userInput);
+            return ResponseEntity.ok(responseText);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @PostMapping("/webhook")

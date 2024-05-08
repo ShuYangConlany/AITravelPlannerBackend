@@ -22,13 +22,13 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                // 允许 localhost:4200 访问所有的 API 路径
                 System.out.println("Adding CORS Mappings");
                 registry.addMapping("/**").allowedOrigins(
                     "http://localhost:4200",
                     GlobalConstants.FRONT_END_URL
-                );
-                
+                ).allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("*")
+                .allowCredentials(true);
             }
         };
     }
