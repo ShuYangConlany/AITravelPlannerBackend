@@ -14,7 +14,7 @@ public class SessionDto {
     private String title;
     private LocalDateTime timestamp;
 
-    // 构造函数
+    
     public SessionDto(String sessionId, String userId, String title, LocalDateTime timestamp) {
         this.sessionId = sessionId;
         this.userId = userId;
@@ -22,7 +22,6 @@ public class SessionDto {
         this.timestamp = timestamp;
     }
 
-    // Getter 和 Setter 方法
     public String getSessionId() {
         return sessionId;
     }

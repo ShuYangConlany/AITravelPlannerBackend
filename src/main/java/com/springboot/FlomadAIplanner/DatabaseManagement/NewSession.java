@@ -15,7 +15,6 @@ public class NewSession {
     private String title;
     private LocalDateTime timestamp;
 
-    // Getter 和 Setter
     public String getSessionId() {
         return sessionId;
     }

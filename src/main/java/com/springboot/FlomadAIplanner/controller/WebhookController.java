@@ -21,9 +21,6 @@ package com.springboot.FlomadAIplanner.controller;
 //     @PostMapping("/webhook")
 //     public String handleWebhook(@RequestBody String request) {
 //         try {
-//             // 模拟 HttpRequest 和 HttpResponse
-//             // 因为在 Spring 中不直接使用 Google Cloud Function 的 HttpRequest 和 HttpResponse
-//             // 这里需要做一些适配或者重构 WbhookFlightJumpPage 的逻辑以适用于 Spring HTTP 处理
 //             return wbhookFlightJumpPage.processRequest(request);
 //         } catch (Exception e) {
 //             return "Error handling request: " + e.getMessage();
@@ -52,7 +49,6 @@ public class WebhookController {
 
     @PostMapping("/webhook")
     public String handleWebhook(@RequestBody String request) {
-        // logger.info("333333333333333333333333333333333333333333333333333");
         return service.processRequest(request);
     }
 }

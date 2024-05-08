@@ -46,6 +46,14 @@ public class WebhookFlightJumpPageService {
                 JsonElement value = entry.getValue();
                 if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isString()) {
                     parameters.put(key, Value.newBuilder().setStringValue(value.getAsString()).build());
+                }else if (value.isJsonObject()) {
+                    JsonObject dateObject = value.getAsJsonObject();
+                    if (dateObject.has("year") && dateObject.has("month") && dateObject.has("day")) {
+                        String dateString = dateObject.get("year").getAsInt() + "-" +
+                                            dateObject.get("month").getAsInt() + "-" +
+                                            dateObject.get("day").getAsInt();
+                        parameters.put(key, Value.newBuilder().setStringValue(dateString).build());
+                    }
                 }
             });
         }
@@ -90,8 +98,10 @@ public class WebhookFlightJumpPageService {
         }
         if (parameters.containsKey("dep_date")) {
             Value dep_date = parameters.get("dep_date");
+            logger.info("case 1");
         } else {
             shouldGoToPageDepTimeReq = true; 
+            logger.info("case 2");
         }
         if (parameters.containsKey("return_date")) {
             Value return_date = parameters.get("return_date");

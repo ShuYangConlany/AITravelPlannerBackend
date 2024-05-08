@@ -1,3 +1,4 @@
+pom for develop:
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -101,43 +102,14 @@
 			<artifactId>protobuf-java-util</artifactId>
 			<version>3.19.1</version> 
 		</dependency>
-
-		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>spring-cloud-gcp-starter-firestore</artifactId>
-			<version>2.0.8</version>
-		</dependency>
 	</dependencies>
 
-	<!-- <build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</build> -->
-
-	<build>
-        <plugins>
-            <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
-				<configuration>
-					<source>21</source>
-					<target>21</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>com.springboot.FlomadAIplanner.FlomadAiPlannerApplication</mainClass>
-				</configuration>
-			</plugin>
-        </plugins>
-    </build>
-
+	</build>
 </project>
-
