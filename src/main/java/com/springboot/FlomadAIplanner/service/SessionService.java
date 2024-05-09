@@ -48,4 +48,14 @@ public class SessionService {
             throw new RuntimeException("Session not found");
         }
     }
+
+    public NewSession updateSessionTitle(String sessionId, String userId, String title) {
+        NewSession session = sessionRepository.findBySessionIdAndUserId(sessionId, userId);
+        if (session != null) {
+            session.setTitle(title);
+            return sessionRepository.save(session);
+        } else {
+            throw new RuntimeException("Session not found");
+        }
+    }
 }

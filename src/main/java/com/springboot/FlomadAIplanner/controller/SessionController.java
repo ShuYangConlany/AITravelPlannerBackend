@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.springboot.FlomadAIplanner.DTO.UpdateTitleRequest;
 import com.springboot.FlomadAIplanner.DatabaseManagement.NewSession;
 import com.springboot.FlomadAIplanner.DatabaseManagement.SessionDto;
 import com.springboot.FlomadAIplanner.service.SessionService;
@@ -55,4 +57,17 @@ public class SessionController {
         NewSession updatedSession = sessionService.updateSession(sessionId, userId, sessionDto.getTitle(), sessionDto.getTimestamp());
         return ResponseEntity.ok(updatedSession);
     }
+
+    @PostMapping("/users/{userId}/sessions/{sessionId}/updateTitle")
+    public ResponseEntity<NewSession> updateSessionTitle(@PathVariable String userId, @PathVariable String sessionId,
+                                                         @RequestBody UpdateTitleRequest updateRequest) {
+        try {
+            NewSession updatedSession = sessionService.updateSessionTitle(sessionId, userId, updateRequest.getTitle());
+            return ResponseEntity.ok(updatedSession);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
 }
+
